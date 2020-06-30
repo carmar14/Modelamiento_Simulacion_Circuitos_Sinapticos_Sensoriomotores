@@ -8,7 +8,7 @@ tao1=10;
 tao2=100;
 tao3=80;
 tao4=4000;
-L=0.4;
+L=10;
 
 x0=[0 0 0 0 0 0];
 
@@ -25,11 +25,11 @@ for i=1:n
 end
 
 figure
-plot(t,y(:,6),'b')
-legend('y6')
-ylabel('Nivel de actividad de la unidad G')
+plot(t,y(:,1),'b',t,y(:,2),'r')
+legend('y1','y2')
+ylabel('Nivel de actividad de las unidades')
 xlabel('Tiempo(ms)')
-title('Mecanismo de adaptacion a la luz en la retina')
+title('Mecanismo de adaptacion')
 
 function [dxdt]=luz_retina(t,X)
     global  tao1 tao2 tao3 tao4 L
@@ -43,10 +43,10 @@ function [dxdt]=luz_retina(t,X)
     
     x1p=(1/tao1)*(-C-P*H+L);
     x2p=(1/tao2)*(-H+C);
-    x3p=(1/tao1)*(-B+(6*C-5*H)/(1+9*A));
-    x4p=(1/tao3)*(-A+B);
-    x5p=(1/tao4)*(-P+0.1*A);
-    x6p=(1/tao1)*(-G+50*B/(13+B));
+    x3p=(1/tao1)*(-B+(6);
+    x4p=(1/tao2)*(-H+C);
+    x5p=(1/tao1)*(-C-P*H+L);
+    x6p=(1/tao2)*(-H+C);
     
     dxdt=[x1p;x2p;x3p;x4p;x5p;x6p];
 
