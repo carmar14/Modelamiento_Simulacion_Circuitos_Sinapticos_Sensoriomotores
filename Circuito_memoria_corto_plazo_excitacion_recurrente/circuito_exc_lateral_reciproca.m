@@ -13,11 +13,11 @@ tao1=20;
 tao2=4000;
 S=0;
 
-x0=[0, 0, 10, 15];
+x0=[0, 0, 0, 0];
 
 % t=0:1e-3:8000;
 
-[t,y]=ode45(@memoria_corto_plazo,[0 8000],x0);
+[t,y]=ode45(@memoria_corto_plazo,[0 18000],x0);
 
 [m1 n]=size(y);
 figure
@@ -28,21 +28,22 @@ for i=1:n
 end
 
 figure
-plot(t,y(:,1),'b',t,y(:,2),'r')
-legend('y1','y2')
+plot(t,y(:,1),'b',t,y(:,2),'--r',t,y(:,3),'k',t,y(:,4),'--g')
+legend('y1','y2','y3','y4')
 ylabel('Frecuencia media de disparo (Hz)')
 xlabel('Tiempo(ms)')
 title('Patrón de actividad de un circuito de memoria de corto plazo')
 
-figure
-plot(y(:,3),y(:,1))
-ylabel('y3')
-xlabel('y1')
-title('Espacio de estado')
+
 
 
 function [dxdt]=memoria_corto_plazo(t,X)
     global A B a b c tao1 tao2 S
+    if t>=200 && t<=500
+        S=50;
+    else
+        S=0;
+    end
     x1=X(1);
     x2=X(2);
     x3=X(3);
