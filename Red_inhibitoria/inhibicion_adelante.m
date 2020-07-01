@@ -35,7 +35,7 @@ title('Red inhibitoria')
 function [dxdt]=inhibicion(t,X)
     global  tao M a r b c sigma
     ran=20+(10).*rand(1,1);
-    if t>=100 && t<=600
+    if t>=100 && t<=200 || t>=400 && t<=600
         r=ran;
     else
         r=0;
