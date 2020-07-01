@@ -26,7 +26,7 @@ for i=1:n
 end
 
 figure
-plot(t,y(:,1),'r',t,y(:,2),'.g',t,y(:,3),'k',t,y(:,4),':b',t,y(:,5),'m')
+plot(t,y(:,1),'r',t,y(:,2),'.k',t,y(:,3),'*g',t,y(:,4),':b',t,y(:,5),'m')
 legend('y1','y2','y3','y4','y5')
 ylabel('Respuestas de las neuronas')
 xlabel('Tiempo(ms)')
@@ -34,9 +34,8 @@ title('Red inhibitoria')
 
 function [dxdt]=inhibicion(t,X)
     global  tao M a r b c sigma
-    ran=20+(10).*rand(1,1);
     if t>=100 && t<=600
-        r=ran;
+        r=24;
     else
         r=0;
     end
@@ -50,9 +49,9 @@ function [dxdt]=inhibicion(t,X)
     
     x1p=(1/tao)*(-E1+r);
     x2p=(1/tao)*(-E2+a*E1);
-    x3p=(1/tao)*(-E3+M*(b*E1-c*E2)^2/(sigma^2+(b*E1-c*E2)^2))*((b*E1-c*E2)>0);
+    x3p=(1/tao)*(-E3+M*(b*E2-c*E1)^2/(sigma^2+(b*E2-c*E1)^2));
     x4p=(1/tao)*(-E4+a*E1);
-    x5p=(1/tao)*(-E5+M*(b*E4-c*E1)^2/(sigma^2+(b*E4-c*E1)^2))*((b*E4-c*E1)>0);
+    x5p=(1/tao)*(-E5+M*(b*E1-c*E4)^2/(sigma^2+(b*E1-c*E)^2));
     
     
     dxdt=[x1p;x2p;x3p;x4p;x5p];
